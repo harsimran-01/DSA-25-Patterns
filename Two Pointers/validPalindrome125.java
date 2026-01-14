@@ -19,6 +19,8 @@ public class validPalindrome125 {
     }
     public static void main(String[] args) {
         String s = "A man, a plan, a canal: Panama";
+        String s1 = " ";
         System.out.println("String is Palindrome : " + isPalindrome(s));
+        System.out.println("String is Palindrome : " + isPalindrome(s1));
     }
 }
