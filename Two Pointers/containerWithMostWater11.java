@@ -2,7 +2,7 @@ public class containerWithMostWater11 {
     public static int maxWater(int nums[]){
         int i=0;
         int j=nums.length-1;
-        int water = 0;
+        int water;
         int max = 0;
 
         while(i<j){
