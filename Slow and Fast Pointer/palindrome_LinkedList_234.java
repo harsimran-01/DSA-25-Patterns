@@ -60,7 +60,6 @@ public class palindrome_LinkedList_234 {
         Node right = prev;
 
         //checking value
-
         while(right != null){
             if(left.data != right.data){
                 return false;
