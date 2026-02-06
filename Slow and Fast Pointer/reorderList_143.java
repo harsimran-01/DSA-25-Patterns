@@ -1,36 +1,57 @@
-import java.lang.classfile.components.ClassPrinter.ListNode;
-
 public class reorderList_143 {
-    /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode middle(ListNode head){
+    static class Node{
+        int data;
+        Node next;
+
+        public Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+    public static Node head;
+    public static Node tail;
+    public static void addFirst(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+
+        newNode.next = head;
+        head = newNode;
+    }
+    public static Node middle(Node head){
         if(head == null){
             return null;
         }
-        ListNode slow = head;
-        ListNode fast = head;
 
-        while(fast != null && fast.next !=null){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }
-
         return slow;
     }
-    public void reorderList(ListNode head) {
-        ListNode mid = middle(head);
-        ListNode prev = null;
-        ListNode curr = mid;
-        ListNode next;
+    public static void printLL(Node head){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data +"->");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void reOrder(Node head){
+        //finding middle
+        Node midNode = middle(head);
+
+        //reversing the second half
+
+        Node prev = null;
+        Node curr = midNode;
+        Node next;
 
         while(curr != null){
             next = curr.next;
@@ -39,14 +60,14 @@ class Solution {
             curr = next;
         }
 
-        ListNode left = head;
-        ListNode right = prev;
+        Node left = head;
+        Node right = prev;
 
-        //merging part
+        //merging the second half to the first half
 
         while(right.next != null){
-            ListNode leftNext = left.next;
-            ListNode rightNext = right.next;
+            Node leftNext = left.next;
+            Node rightNext = right.next;
 
             left.next = right;
             right.next = leftNext;
@@ -55,5 +76,17 @@ class Solution {
             right = rightNext;
         }
     }
-}
+    public static void main(String args[]){
+        addFirst(10);
+        addFirst(20);
+        addFirst(30);
+        addFirst(40);
+
+        printLL(head);
+
+        System.out.println("reOrdering the List");
+        reOrder(head);
+        printLL(head);
+
+    }
 }
